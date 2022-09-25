@@ -88,7 +88,7 @@ letter1 = "Z"
 print(letter1)
 print(letterx)
 ```
-letterx did not change to z. If you assign varaiable1 to equal another variable2, variable1 will change to equal varaible2. However, if you alter variable2 after that line of code, variable1 will remain the same. You must reassign variable 1 to equal variable 2 after you change the value of variable 2 if you want it to change as well.  
+letterx did not change to Z when I set letter1 = "Z". This tells me that if you assign variable1 to equal another variable2, variable1 will change to equal varaible2. However, if you alter variable2 after that line of code, variable1 will remain the same. You must reassign variable 1 to equal variable 2 after you change the value of variable 2 if you want it to change as well. Essentially, the order of each line of code is important.  
 
 
 # Boolean Exercises
