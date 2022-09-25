@@ -11,6 +11,7 @@ print("I")
 print("G")
 print("E")
 ```
+See my script ["PaigeFaulkner.py"](https://github.com/paigefaulkner/Computer-Programming-for-Psychology/blob/main/Assignment%20%232/PaigeFaulkner.py).
 
 ### 2. Do any of the variables show up in the variable editior? 
 No, they show up in the console but not in the variable explorer.
