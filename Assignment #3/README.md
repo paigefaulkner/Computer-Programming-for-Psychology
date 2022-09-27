@@ -2,6 +2,7 @@
 ## Paige Faulkner
 ## Variable operations exercises
 ### 1. Create three variables: "sub_code", "subnr_int", and "subnr_str". The sub_code should be "sub". Assign the integer 2 to subnr_int, and assign the string "2" to subnr_str. Which form of subnr (int or str) can be added to sub_code to create the output "sub2"? Why don't both work?
+
 ```ruby
 import np as np
 import numpy as np
