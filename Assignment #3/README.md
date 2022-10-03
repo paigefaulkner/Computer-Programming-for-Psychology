@@ -69,9 +69,45 @@ Specifically, you have:
 5 images from each category
 2 post-cues (1,2)
 
-## Create a script that outputs a counterbalanced list with every face paired with every house, repeated with each possible post-cue. Then, randomize the order of the list. The final output should look something like this:
+### Create a script that outputs a counterbalanced list with every face paired with every house, repeated with each possible post-cue. Then, randomize the order of the list. 
 ```ruby
-Add code in
+first_item = []
+second_item = []
+
+
+imgs_F = ['face1.png'] * 5 + ['face2.png'] * 5 +  ['face3.png'] * 5 + ['face4.png'] * 5 + ['face5.png'] * 5 
+imgs_H = ['house1.png'] * 5 + ['house2.png'] * 5 + ['house3.png'] * 5 + ['house4.png'] * 5 + ['house5.png'] * 5 
+
+
+first_item.extend(imgs_F)
+first_item.extend(imgs_H)
+first_item.extend(imgs_F)
+first_item.extend(imgs_H)
+print(first_item)
+print(len(first_item))
+
+
+
+imgs_FS = ['face1.png', 'face2.png', 'face3.png', 'face4.png', 'face5.png'] * 5
+imgs_HS = ['house1.png', 'house2.png', 'house3.png', 'house4.png', 'house5.png'] * 5
+
+second_item.extend(imgs_HS)
+second_item.extend(imgs_FS)
+second_item.extend(imgs_HS)
+second_item.extend(imgs_FS)
+print(second_item)
+print(len(second_item))
+
+cues = ['cue1'] * 50 + ['cue2']* 50
+
+studytrials = list(zip(first_item, second_item, cues))
+
+print(studytrials)
+print(len(studytrials))
+
+np.random.shuffle(studytrials)
+print(studytrials)
+
 ```
 
 
