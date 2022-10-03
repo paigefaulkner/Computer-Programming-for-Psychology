@@ -136,23 +136,26 @@ print(colours)
 ## Slicing exercises
 ### 1.Create a list of numbers 0-100 called "list100".
 ```ruby
-list100 = (range(0, 101))
-print(list(list100))
+list100 = list(range(0, 101))
+print(list100)
 ```
 ### 2.Using slicing, print the first 10 numbers in the list.
 ```ruby
-print(list(list100[: 10]))
+print(list100[: 10])
 ```
 ### 3.Using slicing, print all the odd numbers in the list backwards.
 ```ruby
-temp = (list100[1:: 2])
+temp = list100[1:: 2]
+print(temp[:: -1])
 ```
 
 ### 4.Using slicing, print the last four numbers in the list backwards.
 ```ruby
-print(list(temp[:: -1]))
+print(list100[:96:-1])
 ```
 ### 5.Are the 40th-44th numbers in the list equal to integers 39-43? Show the Boolean operation you would use to determine the truth value.
 ```ruby
-print(list(temp[-4:: -1]))
+print(list100[40:45:1])
+print((list100[40:45:1]) == [39,40,41,42,42,43])
 ```
+The result is false which makes sense becuase the list indexes numbers as 0, 1, 2, n.... and I started my list at 0 as well. Therefore, it make sense why starting at an index of 40 and ending at an index of 45 gives me 40, 41, 42, 43, 44, 45. 
