@@ -158,4 +158,4 @@ print(list100[:96:-1])
 print(list100[40:45:1])
 print((list100[40:45:1]) == [39,40,41,42,42,43])
 ```
-The result is false which makes sense becuase the list indexes numbers as 0, 1, 2, n.... and I started my list at 0 as well. Therefore, it make sense why starting at an index of 40 and ending at an index of 45 gives me 40, 41, 42, 43, 44, 45. 
+The result is false which makes sense becuase the list indexes numbers as 0, 1, 2, n.... and I started my list at 0 as well. Therefore, it make sense why starting at an index of 40 and stoping before 45 gives me 40, 41, 42, 43, 44 which does not equal 39, 40, 41, 42, 43. 
