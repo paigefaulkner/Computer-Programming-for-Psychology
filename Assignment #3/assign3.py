@@ -80,7 +80,6 @@ print([[strlist[0], strlist[0]],
 # [(face1.png, house2.png, cue1),
 # (house5.png, face1.png, cue2)...]
 
-# look at images to see correct code
 
 first_item = []
 second_item = []
