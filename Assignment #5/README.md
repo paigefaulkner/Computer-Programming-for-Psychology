@@ -5,80 +5,6 @@
 
 ### 1. On the lines denoted with an asterix *, write in the correct python code:
 
-## Import Exercises 
-
-### 1. Fill in the "Import Modules" section of the experiment structure: 
-```
-#=====================
-#IMPORT MODULES
-#=====================
-import numpy as np  #-import numpy and/or numpy functions *
-from psychopy import core, visual, gui, event #-import psychopy functions
-#-import file save functions
-import json  # can save files various ways (i.e. csv but json has good cross platform readability) 
-#-(import other functions as necessary: os...)
-import random # could be useful for randomizing trials later on 
-import os # allows you to find files and save data
-```
-
-## Directory Exercises
-
-### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
-```ruby
-pics = []
-for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
-print(pics)
-```
-### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
-```ruby 
-for j in range (10): 
-    if pics == imgs_in_dir:
-        print(pic[0] + 'was found')
-    elif not pics == imgs_in_dir
-        raise Exception("The image lists do not add up!")
-    j =+ 1
- ```
-
-### 3.Fill in the following sections of the experiment structure:
-
-```
-#=====================
-#PATH SETTINGS
-#=====================
-#-define the main directory where you will keep all of your experiment files
-main_dir = os.getcwd()
-#-define the directory where you will save your data
-data_dir = os.path.join(main_dir,'data')
-
-print(data_dir)
-#-if you will be presenting images, define the image directory
-image_dir = os.path.join(main_dir,'images')
-
-print(image_dir)
-#-check that these directories exist
-os.path.isdir(image_dir)
-#Currently, we should get false, since they do not actually exist
-
-#=====================
-#PREPARE CONDITION LISTS
-#=====================
-#-check if files to be used during the experiment (e.g., images) exist
-pics = []
-for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
-print(pics)
-imgs_in_dir = sorted(os.listdir(image_dir)
-
-for j in range (10): 
-    if pics == imgs_in_dir:
-        print(pic[0] + 'was found')
-    elif not pics == imgs_in_dir
-        raise Exception("The image lists do not add up!")
-    j =+ 1
-
-```
-
 ```ruby
 #=====================
 #IMPORT MODULES
@@ -106,8 +32,6 @@ image_dir = os.path.join(main_dir,'images')
 print(image_dir)
 #-check that these directories exist
 os.path.isdir(image_dir)
-#Currently, we should get false, since they do not actually exist
-
 
 
 #=====================
@@ -137,10 +61,21 @@ startMessage = "Welcome to the experiment, press any key to begin."
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
-pics = ['face01.png', 'face02.png', 'face03.png', 'face04.png', 'face05.png', 'face06.png', 'face07.png', 'face08.png', 'face09.png', 'face10.png']
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
 imgs_in_dir = sorted(os.listdir(image_dir)
+
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(pic[0] + 'was found')
+    elif not pics == imgs_in_dir
+        raise Exception("The image lists do not add up!")
+    j =+ 1
 #-create counterbalanced list of all conditions *
 catimgs = list(zip(cats,imgs))
+
 
 #=====================
 #PREPARE DATA COLLECTION LISTS
@@ -221,6 +156,78 @@ for block in range(nBlocks):
 #-quit experiment
 ```
 
+## Import Exercises 
+
+### 1. Fill in the "Import Modules" section of the experiment structure: 
+```ruby
+#=====================
+#IMPORT MODULES
+#=====================
+import numpy as np  #-import numpy and/or numpy functions *
+from psychopy import core, visual, gui, event #-import psychopy functions
+#-import file save functions
+import json  # can save files various ways (i.e. csv but json has good cross platform readability) 
+#-(import other functions as necessary: os...)
+import random # could be useful for randomizing trials later on 
+import os # allows you to find files and save data
+```
+
+## Directory Exercises
+
+### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
+```ruby
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
+```
+### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
+```ruby 
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(pic[0] + 'was found')
+    elif not pics == imgs_in_dir
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+ ```
+
+### 3.Fill in the following sections of the experiment structure:
+
+```ruby
+#=====================
+#PATH SETTINGS
+#=====================
+#-define the main directory where you will keep all of your experiment files
+main_dir = os.getcwd()
+#-define the directory where you will save your data
+data_dir = os.path.join(main_dir,'data')
+
+print(data_dir)
+#-if you will be presenting images, define the image directory
+image_dir = os.path.join(main_dir,'images')
+
+print(image_dir)
+#-check that these directories exist
+os.path.isdir(image_dir)
+
+#=====================
+#PREPARE CONDITION LISTS
+#=====================
+#-check if files to be used during the experiment (e.g., images) exist
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
+imgs_in_dir = sorted(os.listdir(image_dir)
+
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(pic[0] + 'was found')
+    elif not pics == imgs_in_dir
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+
+```
 
 
 
