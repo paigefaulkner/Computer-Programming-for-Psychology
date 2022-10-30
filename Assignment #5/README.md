@@ -83,8 +83,9 @@ nBlocks = 2
 cats = ['faces]*10
 imgs = ['img1.png', 'img2.png', 'img3.png', 'img4.png', 'img5.png', 'img6.png', 'img7.png', 'img8.png', 'img9.png', 'img10.png'] 
 #-stimulus properties like size, orientation, location, duration *
-stimSize = [200,200]
-stimDur = 1
+stimSize = [200,200];
+stimDur = 1;
+stimOrien = [10];
 #-start message text *
 startMessage = "Welcome to the experiment, press any key to begin."
 
@@ -92,7 +93,8 @@ startMessage = "Welcome to the experiment, press any key to begin."
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
-
+pics = ['face01.png', 'face02.png', 'face03.png', 'face04.png', 'face05.png', 'face06.png', 'face07.png', 'face08.png', 'face09.png', 'face10.png']
+imgs_in_dir = sorted(os.listdir(image_dir)
 #-create counterbalanced list of all conditions *
 catimgs = list(zip(cats,imgs))
 
@@ -111,9 +113,11 @@ accResp = []
 accResp = [[0]*nTrials]*nBlocks
 
 #-create an empty list for response time collection *
-RT = [];
+RT = []
+RT = [[0]*nTrials]*nBlocks
 #-create an empty list for recording the order of stimulus identities *
-stimOrd_id = [];
+stimOrd_id = []
+stimOrd_id =
 #-create an empty list for recording the order of stimulus properties *
 stimOrd_prop = [];
 
@@ -138,14 +142,17 @@ stimOrd_prop = [];
 #BLOCK SEQUENCE
 #=====================
 #-for loop for nBlocks *
+for block in range(nBlocks):
     #-present block start message
     #-randomize order of trials here *
+    nTrials = random.shuffle(nTrials)
     #-reset response time clock here
     
     #=====================
     #TRIAL SEQUENCE
     #=====================    
     #-for loop for nTrials *
+    for trial in range(nTrials):
         #-set stimuli and stimulus properties for the current trial
         #-empty keypresses
         
