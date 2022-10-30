@@ -22,6 +22,26 @@ import os # allows you to find files and save data
 ```
 
 ## Directory Exercises
+
+### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
+```ruby
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
+```
+### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
+```ruby 
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(pic[0] + 'was found')
+    elif not pics == imgs_in_dir
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+ ```
+
+### 3.Fill in the following sections of the experiment structure:
+
 ```
 #=====================
 #PATH SETTINGS
@@ -49,19 +69,15 @@ for i in range(10):
     pics.append('face' + str(i + 1) + '.png')
 print(pics)
 imgs_in_dir = sorted(os.listdir(image_dir)
-```
-### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
-```ruby
-pics = []
-for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
-print(pics)
-```
-### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
+
 for j in range (10): 
+    if pics == imgs_in_dir:
+        print(pic[0] + 'was found')
+    elif not pics == imgs_in_dir
+        raise Exception("The image lists do not add up!")
+    j =+ 1
 
-
-### 3.Fill in the following sections of the experiment structure:
+```
 
 ```ruby
 #=====================
@@ -91,6 +107,8 @@ print(image_dir)
 #-check that these directories exist
 os.path.isdir(image_dir)
 #Currently, we should get false, since they do not actually exist
+
+
 
 #=====================
 #COLLECT PARTICIPANT INFO
