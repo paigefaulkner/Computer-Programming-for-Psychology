@@ -44,11 +44,23 @@ os.path.isdir(image_dir)
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
-pics = ['face01.png', 'face02.png', 'face03.png', 'face04.png', 'face05.png', 'face06.png', 'face07.png', 'face08.png', 'face09.png', 'face10.png']
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
 imgs_in_dir = sorted(os.listdir(image_dir)
 ```
 ### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
+```ruby
+pics = []
+for i in range(10):
+    pics.append('face' + str(i + 1) + '.png')
+print(pics)
+```
 ### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
+for j in range (10): 
+
+
 ### 3.Fill in the following sections of the experiment structure:
 
 ```ruby
@@ -159,7 +171,7 @@ stimOrd_prop = [];
 for block in range(nBlocks):
     #-present block start message
     #-randomize order of trials here *
-    nTrials = random.shuffle(nTrials)
+    random.shuffle(nTrials)
     #-reset response time clock here
     
     #=====================
