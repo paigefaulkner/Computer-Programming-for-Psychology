@@ -12,10 +12,13 @@
 #=====================
 #IMPORT MODULES
 #=====================
-#-import numpy and/or numpy functions
-#-import psychopy functions
+import numpy as np  #-import numpy and/or numpy functions *
+from psychopy import core, visual, gui, event #-import psychopy functions
 #-import file save functions
+import json  # can save files various ways (i.e. csv but json has good cross platform readability) 
 #-(import other functions as necessary: os...)
+import random # could be useful for randomizing trials later on 
+import os # allows you to find files and save data
 ```
 
 ## Directory Exercises
@@ -24,14 +27,25 @@
 #PATH SETTINGS
 #=====================
 #-define the main directory where you will keep all of your experiment files
+main_dir = os.getcwd()
 #-define the directory where you will save your data
+data_dir = os.path.join(main_dir,'data')
+
+print(data_dir)
 #-if you will be presenting images, define the image directory
+image_dir = os.path.join(main_dir,'images')
+
+print(image_dir)
 #-check that these directories exist
+os.path.isdir(image_dir)
+#Currently, we should get false, since they do not actually exist
 
 #=====================
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
+pics = ['face01.png', 'face02.png', 'face03.png', 'face04.png', 'face05.png', 'face06.png', 'face07.png', 'face08.png', 'face09.png', 'face10.png']
+imgs_in_dir = sorted(os.listdir(image_dir)
 ```
 ### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
 ### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
@@ -80,12 +94,12 @@ os.path.isdir(image_dir)
 nTrials = 10 
 nBlocks = 2
 #-stimulus names (and stimulus extensions, if images) *
-cats = ['faces]*10
+cats = ['faces']*10
 imgs = ['img1.png', 'img2.png', 'img3.png', 'img4.png', 'img5.png', 'img6.png', 'img7.png', 'img8.png', 'img9.png', 'img10.png'] 
 #-stimulus properties like size, orientation, location, duration *
-stimSize = [200,200];
-stimDur = 1;
-stimOrien = [10];
+stimSize = [200,200]
+stimDur = 1
+stimOrien = [10]
 #-start message text *
 startMessage = "Welcome to the experiment, press any key to begin."
 
@@ -106,7 +120,7 @@ corrResp = []
 corrResp = [[0]*nTrials]*nBlocks
 #-create an empty list for participant responses (e.g., "on this trial, response was a X") *
 pptResp = []
-pptResp = [[0]*nTrials] 
+pptResp = [[0]*nTrials]*nBlocks
 
 #-create an empty list for response accuracy collection (e.g., "was participant correct?") *
 accResp = []
@@ -117,7 +131,7 @@ RT = []
 RT = [[0]*nTrials]*nBlocks
 #-create an empty list for recording the order of stimulus identities *
 stimOrd_id = []
-stimOrd_id =
+stimOrd_id = 
 #-create an empty list for recording the order of stimulus properties *
 stimOrd_prop = [];
 
