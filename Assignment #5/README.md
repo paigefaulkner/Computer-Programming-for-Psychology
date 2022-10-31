@@ -99,9 +99,9 @@ RT = []
 RT = [[0]*nTrials]*nBlocks
 #-create an empty list for recording the order of stimulus identities *
 stimOrd_id = []
-stimOrd_id = 
+
 #-create an empty list for recording the order of stimulus properties *
-stimOrd_prop = [];
+stimOrd_prop = []
 
 #=====================
 #CREATION OF WINDOW AND STIMULI
