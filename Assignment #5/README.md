@@ -61,20 +61,23 @@ startMessage = "Welcome to the experiment, press any key to begin."
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
-pics = []
 for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
 print(pics)
-imgs_in_dir = sorted(os.listdir(image_dir)
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
 
 for j in range (10): 
     if pics == imgs_in_dir:
-        print(pic[0] + 'was found')
-    elif not pics == imgs_in_dir
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
         raise Exception("The image lists do not add up!")
     j =+ 1
-#-create counterbalanced list of all conditions *
-catimgs = list(zip(cats,imgs))
+    if j == 10:
+        break
 
 
 #=====================
@@ -214,18 +217,23 @@ os.path.isdir(image_dir)
 #PREPARE CONDITION LISTS
 #=====================
 #-check if files to be used during the experiment (e.g., images) exist
-pics = []
 for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
 print(pics)
-imgs_in_dir = sorted(os.listdir(image_dir)
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
 
 for j in range (10): 
     if pics == imgs_in_dir:
-        print(pic[0] + 'was found')
-    elif not pics == imgs_in_dir
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
         raise Exception("The image lists do not add up!")
     j =+ 1
+    if j == 10:
+        break
 
 ```
 
