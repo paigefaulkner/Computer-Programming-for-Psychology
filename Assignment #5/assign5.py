@@ -1,3 +1,13 @@
+# Assignment 5
+
+# I downloaded the folder "images" from the tutorial and used that as my image files for the assignment to test to ensure things worked. 
+
+## Experiment Structure Excercises 
+### We want to find out how long it takes people to see faces in common objects. We will present 10 images, one image per trial, in a randomized order. Each image will appear for 1 second in the center of the screen, at a size of 200x200 pixels. Each trial will start with a 1-second fixation cross, and end with a "wait for next image" text. There will be 2 blocks of trials, with 10 trials each.
+
+### 1. On the lines denoted with an asterix *, write in the correct python code:
+
+```ruby
 #=====================
 #IMPORT MODULES
 #=====================
@@ -55,18 +65,22 @@ startMessage = "Welcome to the experiment, press any key to begin."
 #-check if files to be used during the experiment (e.g., images) exist
 pics = []
 for i in range(10):
-    pics.append('face' + str(i + 1) + '.png')
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
 print(pics)
-imgs_in_dir = sorted(os.listdir(image_dir)
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
 
 for j in range (10): 
     if pics == imgs_in_dir:
-        print(pic[0] + 'was found')
-    elif not pics == imgs_in_dir
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
         raise Exception("The image lists do not add up!")
     j =+ 1
-#-create counterbalanced list of all conditions *
-catimgs = list(zip(cats,imgs))
+    if j == 10:
+        break
 
 
 #=====================
@@ -88,9 +102,9 @@ RT = []
 RT = [[0]*nTrials]*nBlocks
 #-create an empty list for recording the order of stimulus identities *
 stimOrd_id = []
-stimOrd_id = 
+
 #-create an empty list for recording the order of stimulus properties *
-stimOrd_prop = [];
+stimOrd_prop = []
 
 #=====================
 #CREATION OF WINDOW AND STIMULI
@@ -163,3 +177,76 @@ import json  # can save files various ways (i.e. csv but json has good cross pla
 import random # could be useful for randomizing trials later on 
 import os # allows you to find files and save data
 ```
+
+## Directory Exercises
+
+### 1. Automate the creation of the list of images ("pics"). Do not write them all out manually.
+```ruby
+pics =[]
+for i in range(10):
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
+print(pics)
+
+```
+### 2.Automate the task of finding out whether each image (as listed in "pics") exists in the "images" directory. Use a for loop and if statements to print "cat1.jpg was found!", "cat2.jpg was found!"... etc. Raise an exception if an image does not exist.
+```ruby 
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
+
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+    if j == 10:
+        break
+ ```
+
+### 3.Fill in the following sections of the experiment structure:
+
+```ruby
+#=====================
+#PATH SETTINGS
+#=====================
+#-define the main directory where you will keep all of your experiment files
+main_dir = os.getcwd()
+#-define the directory where you will save your data
+data_dir = os.path.join(main_dir,'data')
+
+print(data_dir)
+#-if you will be presenting images, define the image directory
+image_dir = os.path.join(main_dir,'images')
+
+print(image_dir)
+#-check that these directories exist
+os.path.isdir(image_dir)
+
+#=====================
+#PREPARE CONDITION LISTS
+#=====================
+#-check if files to be used during the experiment (e.g., images) exist
+pics =[]
+for i in range(10):
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
+print(pics)
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
+
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+    if j == 10:
+        break
+
+```
+
