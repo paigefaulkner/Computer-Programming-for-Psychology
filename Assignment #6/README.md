@@ -156,30 +156,11 @@ for block in range(nBlocks):
     my_text.draw()
     win.flip()
     event.waitKeys()
-
-    for trial in range(nTrials): #-randomize order of trials here
-        my_image.image = os.path.join(image_dir, stims[trial])
-
-        my_image.pos = (horiz_mult[trial] * thisWidth/4, horiz_mult[trial] * thisHeight/4)
-        my_image.draw()
-        fix_text.draw()
-        win.flip()
-        event.waitKeys()
-        my_text.text = trial_end_msg + str(trial)
-        my_text.draw()
-        win.flip()
-        event.waitKeys()
-win.close()
-
-
-
-    
     #=====================
     #TRIAL SEQUENCE
     #=====================    
     #-for loop for nTrials
-        #-set stimuli and stimulus properties for the current trial
-        
+        #-set stimuli and stimulus properties for the current trial  
         #=====================
         #START TRIAL
         #=====================  
@@ -194,6 +175,20 @@ win.close()
         #-draw end trial text
         #-flip window
         #-wait time (stimulus duration)
+
+    for trial in range(nTrials): #-randomize order of trials here
+        my_image.image = os.path.join(image_dir, stims[trial])
+
+        my_image.pos = (horiz_mult[trial] * thisWidth/4, horiz_mult[trial] * thisHeight/4)
+        my_image.draw()
+        fix_text.draw()
+        win.flip()
+        event.waitKeys()
+        my_text.text = trial_end_msg + str(trial)
+        my_text.draw()
+        win.flip()
+        event.waitKeys()
+win.close()
         
 #======================
 # END OF EXPERIMENT
