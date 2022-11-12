@@ -110,26 +110,24 @@ win = visual.Window(monitor=mon, fullscr=True)
 ### 1. Write a short script that shows different face images from the image directory at 400x400 pixels in size. What does this do to the images? How can you keep the proper image dimensions and still change the size?
 The images that had equal width and height were presented as smaller images, but still proportional. However, the images that were rectangular were cropped. 
 To fix this, you can use height units or normalized units. Height units are scaled to window size but remain square. Normalized units are similar to height units except they do not keep the image square neccesarily. 
-### 2. Write a short script that makes one image appear at a time, each in a different quadrant of your screen (put the window in fullscreen mode). Think about how you can calculate window locations without using a trial-and-error method.
 
+### 2. Write a short script that makes one image appear at a time, each in a different quadrant of your screen (put the window in fullscreen mode). Think about how you can calculate window locations without using a trial-and-error method.
+See full code in under question 4. 
+To put the images in one of the 4 quadrants, I multpled the horizontal width by either 1 or -1 (-1 = left side of y axis, 1 = right side of y axis) and multpled the verticial height by (-1 or 1) (-1 = below x axis, +1 = above x axis) 
+Importantly, I set them up as such so that each combo would occur-> bottom left (-1,-1), bottom right (1,-1), top left (-1,1), top right (1,1): 
+```ruby
+horiz_mult = [-1, 1, -1, 1]
+vert_mult = [1, 1, -1, -1]
+#within my for loop: 
+ my_image.pos = (horiz_mult[trial] * thisWidth/4, horiz_mult[trial] * thisHeight/4)
+```
 ### 3. Create a fixation cross stimulus (hint:text stimulus).
+```ruby
+fix_text = visual.TextStim(win, text = '+')
+```
 
 ### 4. Fill in the following pseudocode with the real code you have learned so far:
 ```ruby
-# retval = os.getcwd()
-# print("Current working directory %s" % retval)
-
-# my_image = visual.ImageStim(win)
-# image_dir = os.path.join(main_dir, 'images')
-
-
-# pic_loc = os.path.join(image_dir, 'face01.jpg')
-# print(image_dir)
-# my_image = visual.ImageStim(win, image=pic_loc)
-# my_image.draw()
-# win.flip()
-# event.waitKeys()
-# win.close()
 
 
 #=====================
