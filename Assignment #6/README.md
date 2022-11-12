@@ -70,8 +70,8 @@ win = visual.Window(monitor=mon, size=800,800)
 When I increase numbers in the size = (), the size of the window increases. 
 ```ruby
 win = visual.Window(monitor=mon, fullscr=True)
-```ruby
-I set the window to full screen so ny window takes up the full screen size of my monitor. 
+```
+I set the window to full screen so my window takes up the full screen size of my monitor. 
 ### 2. How does changing colorSpace affect how you define the color of your window? Can you define colors by name?
 ```ruby
 
@@ -81,7 +81,7 @@ win = visual.Window(monitor=mon, fullscr=True, color ='Firebrick') #colour is re
 
 ```
 When I set the colorSpace to 'rgb', the colour of the units I put in is light blue, when i change it to 'hsv' the color is pink. 
-The different colour types hsv, dkl, rgb, hex values and lms have different coding systems for the colours. You can also define colours by name using web/X11 colour names. 
+The different colour types hsv, dkl, rgb, hex values and lms have different coding systems for the colours. You can also define colours by name using web/X11 colour names (i.e. "Firebrick".)
 ### 3. Fill in the following pseudocode with the real code you have learned so far:
 
 ```ruby
