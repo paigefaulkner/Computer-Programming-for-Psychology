@@ -64,10 +64,24 @@ sub_dir = os.path.join(main_dir,'sub_info',filename)
 ### Look at the psychopy help page on "window" to help solve the exercises:
 
 ### 1. How does changing "units" affect how you define your window size?
-If you use height units, the size fo all the stimuli will adjust to your screen. 
-When I increase numbers in the size = (), the size of the window increases. I set the window to full screen to mimic a real experiement. 
+```ruby
+win = visual.Window(monitor=mon, size=800,800)
+```
+When I increase numbers in the size = (), the size of the window increases. 
+```ruby
+win = visual.Window(monitor=mon, fullscr=True)
+```ruby
+I set the window to full screen so ny window takes up the full screen size of my monitor. 
 ### 2. How does changing colorSpace affect how you define the color of your window? Can you define colors by name?
+```ruby
 
+win = visual.Window(monitor=mon, fullscr=True, color =(0,0.5,1), colorSpace = 'rgb') #colour is blue
+win = visual.Window(monitor=mon, fullscr=True, color =(0,0.5,1), colorSpace = 'hsv') #colour is pink
+win = visual.Window(monitor=mon, fullscr=True, color ='Firebrick') #colour is red
+
+```
+When I set the colorSpace to 'rgb', the colour of the units I put in is light blue, when i change it to 'hsv' the color is pink. 
+The different colour types hsv, dkl, rgb, hex values and lms have different coding systems for the colours. You can also define colours by name using web/X11 colour names. 
 ### 3. Fill in the following pseudocode with the real code you have learned so far:
 
 ```ruby
@@ -83,8 +97,8 @@ thisWidth = thisSize[0]
 thisHeight = thisSize[1]
 
 win = visual.Window(monitor=mon, fullscr=True)
-# win = visual.Window(monitor=mon, size = (1920,1200), color =(0,0.5,1), colorSpace= hsv)
-#could also do fullscr = True 
+
+ 
 
 
 #-define the window (size, color, units, fullscreen mode) using psychopy functions
@@ -94,7 +108,8 @@ win = visual.Window(monitor=mon, fullscr=True)
 ### Check the psychopy help page on "ImageStim" to help you solve these exercises:
 
 ### 1. Write a short script that shows different face images from the image directory at 400x400 pixels in size. What does this do to the images? How can you keep the proper image dimensions and still change the size?
-
+The images that had equal width and height were presented as smaller images, but still proportional. However, the images that were rectangular were cropped. 
+To fix this, you can use height units or normalized units. Height units are scaled to window size but remain square. Normalized units are similar to height units except they do not keep the image square neccesarily. 
 ### 2. Write a short script that makes one image appear at a time, each in a different quadrant of your screen (put the window in fullscreen mode). Think about how you can calculate window locations without using a trial-and-error method.
 
 ### 3. Create a fixation cross stimulus (hint:text stimulus).
