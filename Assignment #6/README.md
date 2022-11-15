@@ -30,12 +30,12 @@ from psychopy import visual, monitors, event
 from datetime import datetime
 
 exp_info = {'subject_nr':0, 'age':0, 'handedness':('right','left','ambi'), 
-            'gender':(), 'session':1}
+            'gender':(), 'session':1} #setting session to 1, and making gender an empty box to write whatever
 
 
 my_dlg = gui.DlgFromDict(dictionary=exp_info, 
                         title="subject info",
-                        fixed=['session'],
+                        fixed=['session'], #setting sessions to be fixed
                         order=['session', 'subject_nr', 'age', 'gender', 'handedness'], 
                         show= False)
 
