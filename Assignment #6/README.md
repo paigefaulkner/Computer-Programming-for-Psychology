@@ -108,7 +108,7 @@ win = visual.Window(monitor=mon, fullscr=True)
 ### Check the psychopy help page on "ImageStim" to help you solve these exercises:
 
 ### 1. Write a short script that shows different face images from the image directory at 400x400 pixels in size. What does this do to the images? How can you keep the proper image dimensions and still change the size?
-The images that had equal width and height were presented as smaller images, but still proportional. However, the images that were rectangular were cropped. 
+When I set the size to 400 X 400 px, the images were presented as squares and the red car picture was cropped. The images that had equal width and height were presented as smaller images, but still proportional. However, the images that were rectangular were cropped. 
 To fix this, you can use height units or normalized units. Height units are scaled to window size but remain square. Normalized units are similar to height units except they do not keep the image square neccesarily. 
 
 ### 2. Write a short script that makes one image appear at a time, each in a different quadrant of your screen (put the window in fullscreen mode). Think about how you can calculate window locations without using a trial-and-error method.
@@ -140,7 +140,7 @@ block_msg = 'Press any key to proceed to the next block!'
 trial_end_msg = 'End of trial'
 #-define stimuli using psychopy functions (images, fixation cross)
 fix_text = visual.TextStim(win, text = '+')
-my_image = visual.ImageStim(win, units ='pix', size =(100,100))
+my_image = visual.ImageStim(win, units ='pix', size =(400,400))
 nTrials = 4
 nBlocks = 2
 image_dir = os.path.join(main_dir, 'images')
