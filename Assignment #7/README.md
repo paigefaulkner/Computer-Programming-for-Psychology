@@ -401,6 +401,113 @@ win.close()
         
 #======================
 # END OF EXPERIMENT
-#======================        
+#======================   
+```
+### 1. Adjust your experiment so that it follows frame-based timing rather than clock timing (comment out the clock-based timing code in case you want to use it again) using for loops and if statements.
+My monitors refresh rate = 60hz. 
+```ruby
+from psychopy import visual, monitors, event, core, logging
+import os
+refresh=1.0/60.0 #single frame duration in seconds
+print(1/(1/60)) #reciprocal of refresh 
+#So this:
+fix_dur = 1.0 #1 sec
+image_dur = 2.0 #2 sec
+text_dur = 1.5 #1.5 sec
+
+#Becomes:
+fix_frames = fix_dur / refresh
+image_frames = image_dur / refresh
+text_frames = text_dur / refresh
+
+print("Seconds:", fix_dur, image_dur, text_dur)
+print("Frames:", fix_frames, image_frames, text_frames)
+
+
+#define the monitor parameters
+mon = monitors.Monitor('myMonitor', width=35.56, distance=60)
+mon.setSizePix([1600,900])
+win = visual.Window(monitor=mon) #define a window
+refresh=1.0/60.0
+#set durations
+fix_dur = 1.0 #200 ms
+image_dur = 2.0 #100 ms
+text_dur = 1.5 #200 ms
+
+#set frame counts
+fix_frames = int(fix_dur / refresh) #whole number
+image_frames = int(image_dur / refresh) #whole number
+text_frames = int(text_dur / refresh) #whole number
+#the total number of frames to be presented on a trial
+total_frames = int(fix_frames + image_frames + text_frames)
+
+fix = visual.TextStim(win, text='+')
+my_image = visual.ImageStim(win)
+
+nBlocks=1
+nTrials=20
+
+#-define the main directory where you will keep all of your experiment files
+main_dir = os.getcwd()
+#-define the directory where you will save your data
+data_dir = os.path.join(main_dir,'data')
+image_dir = os.path.join(main_dir,'images')
+stims = ['face01.jpg','face02.jpg','face03.jpg'] 
+
+#this can output various information about your experiment
+
+win.recordFrameIntervals = True #record frames
+#give the monitor refresh rate plus a few ms tolerance (usually 4ms)
+win.refreshThreshold = 1.0/60.0 + 0.004
+
+# Set the log module to report warnings to the standard output window 
+#(default is errors only).
+logging.console.setLevel(logging.WARNING)
+
+
+for block in range(nBlocks):
+    #=====================
+    #TRIAL SEQUENCE
+    #=====================    
+    for trial in range(nTrials):
+        #-set stimuli and stimulus properties for the current trial
+        
+        my_image.image = os.path.join(image_dir,stims[trial])
+        #=====================
+        #START TRIAL
+        #=====================   
+        for frameN in range(total_frames): #for the whole trial...
+            #-draw stimulus
+            if 0 <= frameN <= fix_frames: #number of frames for fixation      
+                fix.draw() #draw
+                win.flip() #show
+                
+                if frameN == fix_frames: #last frame for the fixation
+                    print("End fix frame =", frameN) #print frame number
+                    
+            #number of frames for image after fixation
+            if fix_frames < frameN <= (fix_frames+image_frames):      
+                my_image.draw() #draw
+                win.flip() #show 
+                
+                if frameN == (fix_frames+image_frames): #last frame for the image
+                    print("End image frame =", frameN) #print frame number  
+                    
+            #number of frames for the final text stimulus    
+            if (fix_frames+image_frames) < frameN < total_frames:  
+                fix.draw() #draw
+                win.flip() #show  
+                
+                if frameN == (total_frames-1): #last frame for the text
+                    print("End text frame =", frameN) #print frame number 
+        
+        #this will print total number of frames dropped following every trial
+        print('Overall, %i frames were dropped.' % win.nDroppedFrames)   
+                
+win.close()  
+```
 #-close window
 ```
+### 2. Add a "dropped frame" detector to your script to find out whether your experiment is dropping frames. How many total frames are dropped in the experiment? 
+# If 20 or fewer frames are dropped in the whole experiment (1 frame per trial), keep frame-based timing in your experiment. Otherwise, switch back to the CountdownTimer.
+The code above includes and dropped frame detector and I have dropping greater than 1 frame per trial. Therefore, I will switch back to the CoundownTimer. 
