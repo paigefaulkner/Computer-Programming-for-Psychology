@@ -168,3 +168,239 @@ for trial in range(nTrials): #loop through trials
 win.close() #close the window after trials have looped 
 ```
 The CountdownTimer() has pecision to three decimal places.
+
+### 4. Edit your main experiment script so that the trials loop according to a clock timer. Also create and implement a block_timer and a trial_timer.
+
+```ruby
+#=====================
+#IMPORT MODULES
+#=====================
+import numpy as np  #-import numpy and/or numpy functions *
+from psychopy import core, visual, gui, event, monitors #-import psychopy functions
+#-import file save functions
+import json  # can save files various ways (i.e. csv but json has good cross platform readability) 
+#-(import other functions as necessary: os...)
+import random # could be useful for randomizing trials later on 
+import os # allows you to find files and save data
+from ctypes import sizeof
+from matplotlib.pyplot import hsv
+from datetime import datetime
+
+#=====================
+#PATH SETTINGS
+#=====================
+#-define the main directory where you will keep all of your experiment files
+main_dir = os.getcwd()
+#-define the directory where you will save your data
+data_dir = os.path.join(main_dir,'data')
+
+print(data_dir)
+#-if you will be presenting images, define the image directory
+image_dir = os.path.join(main_dir,'images')
+
+print(image_dir)
+#-check that these directories exist
+os.path.isdir(image_dir)
+
+
+#=====================
+#COLLECT PARTICIPANT INFO
+#=====================
+#-create a dialogue box that will collect current participant number, age, gender, handedness
+
+
+exp_info = {'subject_nr':0, 'age':0, 'handedness':('right','left','ambi'), 
+            'gender':(), 'session':1}
+
+
+my_dlg = gui.DlgFromDict(dictionary=exp_info, 
+                        title="subject info",
+                        fixed=['session'],
+                        order=['session', 'subject_nr', 'age', 'gender', 'handedness'], 
+                        show= False)
+
+print("All variables have been created! Now ready to show the dialog box!")
+
+show_dlg = my_dlg.show()
+
+
+#get date and time
+
+
+date = datetime.now() #what time is it right now?
+print(date)
+exp_info['date'] = str(date.day) + str(date.month) + str(date.year)
+print(exp_info['date'])
+#-create a unique filename for the data
+filename = str(exp_info['subject_nr']) + '_' + exp_info['date'] + '.csv'
+print(filename)
+import os
+main_dir = os.getcwd() #define the main directory where experiment info is stored
+#create a subject info directory to save subject info
+sub_dir = os.path.join(main_dir,'sub_info',filename)
+
+#get date and time
+#-create a unique filename for the data
+
+#=====================
+#STIMULUS AND TRIAL SETTINGS
+#=====================
+#-number of trials and blocks *
+nTrials = 10 
+nBlocks = 2
+#-stimulus names (and stimulus extensions, if images) *
+pics = []
+for i in range(10):
+    if i < 9:
+        pics.append('face0' + str(i + 1) + '.jpg')
+    elif i == 9:
+        pics.append('face' + str(i + 1) + '.jpg')
+print(pics)
+imgs_in_dir = sorted(os.listdir(image_dir))
+print(imgs_in_dir)
+#-stimulus properties like size, orientation, location, duration *
+stimSize = [200,200]
+stimDur = 1
+stimOrien = [10]
+#-start message text *
+startMessage = "Welcome to the experiment, press any key to begin."
+
+#=====================
+#PREPARE CONDITION LISTS
+#=====================
+#-check if files to be used during the experiment (e.g., images) exist
+
+
+for j in range (10): 
+    if pics == imgs_in_dir:
+        print(str(pics[j]) + ' was found')
+    elif not pics == imgs_in_dir:
+        raise Exception("The image lists do not add up!")
+    j =+ 1
+    if j == 10:
+        break
+
+    
+#-create counterbalanced list of all conditions *
+random.shuffle(pics)
+
+#=====================
+#PREPARE DATA COLLECTION LISTS
+#=====================
+#-create an empty list for correct responses (e.g., "on this trial, a response of X is correct") *
+corrResp = []
+corrResp = [[0]*nTrials]*nBlocks
+#-create an empty list for participant responses (e.g., "on this trial, response was a X") *
+pptResp = []
+pptResp = [[0]*nTrials]*nBlocks
+
+#-create an empty list for response accuracy collection (e.g., "was participant correct?") *
+accResp = []
+accResp = [[0]*nTrials]*nBlocks
+
+#-create an empty list for response time collection *
+RT = []
+RT = [[0]*nTrials]*nBlocks
+#-create an empty list for recording the order of stimulus identities *
+stimOrd_id = []
+#-create an empty list for recording the order of stimulus properties *
+stimOrd_prop = []
+
+#=====================
+#CREATION OF WINDOW AND STIMULI
+#=====================
+#-define the monitor settings using psychopy functions
+mon = monitors.Monitor('myMonitor', width=50.8, distance=60) #define the monitor parameters
+#-define the window (size, color, units, fullscreen mode) using psychopy functions
+mon.setSizePix([1920,1200])
+mon.save()
+thisSize = mon.getSizePix()
+thisWidth = thisSize[0]
+thisHeight = thisSize[1]
+
+win = visual.Window(monitor=mon, fullscr=True)
+
+#-define experiment start text unsing psychopy functions
+start_msg = 'Welcome to the Experiment'
+#-define block (start)/end text using psychopy functions
+block_msg = 'Press any key to proceed to the next block!'
+trial_end_msg = 'End of trial'
+#-define stimuli using psychopy functions (images, fixation cross)
+fix_text = visual.TextStim(win, text = '+')
+my_image = visual.ImageStim(win, units ='pix', size =(400,400))
+nTrials = 4
+nBlocks = 2
+block_timer = core.Clock()
+trial_timer = core.Clock()
+image_dir = os.path.join(main_dir, 'images')
+stims = ['face01.jpg', 'face02.jpg', 'face03.jpg', 'face04.jpg']
+horiz_mult = [-1, 1, -1, 1]
+vert_mult = [1, 1, -1, -1]
+corrResp = [True, True, True, True,]
+#-create response time clock
+#A7 input***
+#-make mouse pointer invisible
+
+#=====================
+#START EXPERIMENT
+#=====================
+#-present start message text
+my_text = visual.TextStim(win)
+my_text.text = start_msg
+my_text.draw()
+win.flip()
+
+#-allow participant to begin experiment with button press
+event.waitKeys()
+#=====================
+#BLOCK SEQUENCE
+#=====================
+#-for loop for nBlocks
+for block in range(nBlocks): 
+    block_timer.reset()
+    while block_timer.getTime() <= 20:
+        my_text.text = block_msg #-present block start message
+        my_text.draw()
+        win.flip()
+        event.waitKeys()
+    #=====================
+    #TRIAL SEQUENCE
+    #=====================    
+    #-for loop for nTrials
+        #-set stimuli and stimulus properties for the current trial  
+        #=====================
+        #START TRIAL
+        #=====================  
+        #-draw fixation
+        #-flip window
+        #-wait time (stimulus duration)
+        
+        #-draw image
+        #-flip window
+        #-wait time (stimulus duration)
+        
+        #-draw end trial text
+        #-flip window
+        #-wait time (stimulus duration)
+
+        for trial in range(nTrials): #-randomize order of trials here
+            my_image.image = os.path.join(image_dir, stims[trial])
+
+            my_image.pos = (horiz_mult[trial] * thisWidth/4, horiz_mult[trial] * thisHeight/4)
+            trial_timer.reset()
+            while trial_timer.getTime() < 1:
+                my_image.draw()
+                fix_text.draw()
+                win.flip()
+                event.waitKeys()
+            my_text.text = trial_end_msg + str(trial)
+            my_text.draw()
+            win.flip()
+            event.waitKeys()
+win.close()
+        
+#======================
+# END OF EXPERIMENT
+#======================        
+#-close window
+```
