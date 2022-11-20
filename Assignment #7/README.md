@@ -444,17 +444,25 @@ total_frames = int(fix_frames + image_frames + text_frames)
 fix = visual.TextStim(win, text='+')
 my_image = visual.ImageStim(win)
 
-nBlocks=1
-nTrials=20
 
 #-define the main directory where you will keep all of your experiment files
 main_dir = os.getcwd()
 #-define the directory where you will save your data
 data_dir = os.path.join(main_dir,'data')
 image_dir = os.path.join(main_dir,'images')
-stims = ['face01.jpg','face02.jpg','face03.jpg'] 
+stims = []
+for i in range(10):
+    if i < 9: 
+        stims.append('face0' + str(i +1) + '.jpg') 
+    elif i == 9:
+        stims.append('face'+ str(i +1) + '.jpg')
+print(stims)
+stims = stims*2
+print(stims)
+print(len(stims))
 
-#this can output various information about your experiment
+nBlocks=1
+nTrials= len(stims)
 
 win.recordFrameIntervals = True #record frames
 #give the monitor refresh rate plus a few ms tolerance (usually 4ms)
@@ -505,8 +513,6 @@ for block in range(nBlocks):
         print('Overall, %i frames were dropped.' % win.nDroppedFrames)   
                 
 win.close()  
-
-#-close window
 ```
 ### 2. Add a "dropped frame" detector to your script to find out whether your experiment is dropping frames. How many total frames are dropped in the experiment? If 20 or fewer frames are dropped in the whole experiment (1 frame per trial), keep frame-based timing in your experiment. Otherwise, switch back to the CountdownTimer.
-The code above includes and dropped frame detector and I have dropping greater than 1 frame per trial. Therefore, I will switch back to the CoundownTimer. 
+The code above includes and dropped frame detector and I have 49 total frames dropped in 20 trials ( dropping greater than 1 frame per trial.) Therefore, I will switch back to the CoundownTimer. 
