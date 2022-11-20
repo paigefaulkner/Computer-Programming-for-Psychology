@@ -505,9 +505,8 @@ for block in range(nBlocks):
         print('Overall, %i frames were dropped.' % win.nDroppedFrames)   
                 
 win.close()  
-```
+
 #-close window
 ```
-### 2. Add a "dropped frame" detector to your script to find out whether your experiment is dropping frames. How many total frames are dropped in the experiment? 
-# If 20 or fewer frames are dropped in the whole experiment (1 frame per trial), keep frame-based timing in your experiment. Otherwise, switch back to the CountdownTimer.
+### 2. Add a "dropped frame" detector to your script to find out whether your experiment is dropping frames. How many total frames are dropped in the experiment? If 20 or fewer frames are dropped in the whole experiment (1 frame per trial), keep frame-based timing in your experiment. Otherwise, switch back to the CountdownTimer.
 The code above includes and dropped frame detector and I have dropping greater than 1 frame per trial. Therefore, I will switch back to the CoundownTimer. 
