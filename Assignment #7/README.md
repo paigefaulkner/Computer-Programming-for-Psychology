@@ -1,3 +1,34 @@
+## Wait exercises
+### 1. Fill in the following pseudocode with the real code you have learned so far using "core.wait" (and run it to make sure it works):   
+ ```ruby
+      #=====================
+        #START TRIAL
+        #===================== 
+for trial in range(nTrials): #loop through trials
+    
+        my_image.image = os.path.join(image_dir,stims[trial])
+        #-draw fixation
+        #-flip window
+        #-wait time (stimulus duration)
+        fix_text.draw()
+        win.flip() #show
+        core.wait(0.5) #wait .5 seconds, then:
+        
+        #-draw image
+        #-flip window
+        #-wait time (stimulus duration)
+        my_image.draw() #draw
+        win.flip() #show
+        core.wait(.5) #wait .5 seconds, then:
+        
+        #-draw end trial text
+        #-flip window
+        #-wait time (stimulus duration)
+        finalText.draw() #draw
+        win.flip() #show
+        core.wait(.5) #wait .5 seconds, then:
+```
+
 ## Clock exercises
 ### 1. Create a "wait_timer" to find out exactly how long core.wait(2) presents each image. Make sure this is not counting the time of the whole trial, but only the duration of each image. How precise is core.wait?
 ```ruby
