@@ -1,11 +1,42 @@
 ## Wait exercises
 ### 1. Fill in the following pseudocode with the real code you have learned so far using "core.wait" (and run it to make sure it works):   
  ```ruby
+
+## Wait exercises
+### 1. Fill in the following pseudocode with the real code you have learned so far using "core.wait" (and run it to make sure it works):   
+from psychopy import visual, monitors, event, core
+
+#define the monitor parameters
+mon = monitors.Monitor('myMonitor', width=35.56, distance=60)
+mon.setSizePix([1600,900])
+win = visual.Window(monitor=mon) #define a window
+
+import os
+#stuff you only have to define once at the top of your script
+main_dir = os.getcwd() 
+image_dir = os.path.join(main_dir,'images')
+
+
+fix_text = visual.TextStim(win, text='+')
+
+my_image = visual.ImageStim(win)
+
+
+#create a list if images to show
+stims = []
+for i in range(3):
+    if i < 9: 
+        stims.append('face0' + str(i +1) + '.jpg') 
+print(stims)
+
+nTrials=3 #create a number of trials for your images
+     
+     
       #=====================
         #START TRIAL
         #===================== 
 for trial in range(nTrials): #loop through trials
-    
+        finalText = visual.TextStim(win, text='End of Trial ' + str(trial + 1))
         my_image.image = os.path.join(image_dir,stims[trial])
         #-draw fixation
         #-flip window
@@ -27,6 +58,8 @@ for trial in range(nTrials): #loop through trials
         finalText.draw() #draw
         win.flip() #show
         core.wait(.5) #wait .5 seconds, then:
+
+win.close()
 ```
 
 ## Clock exercises
