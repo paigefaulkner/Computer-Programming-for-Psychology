@@ -169,3 +169,80 @@ win.close()
 ```
 When I un indent the if keys: conditional, it does not print "the response that was counted" for each trial. Instead, it only prints the response that was counted as the first response of trial 10. 
 
+## Psychtoolbox keypress exercises
+### 1. Notice how "for key in keys:" in the kb examples of level6 are not indented within the stimulus presentation while loop. What happens if you indent this line? How is this different from event.getKeys
+This is the proper code in the while loop for the keyboard example: 
+```ruby 
+from psychopy import core, event, visual, monitors
+
+mon = monitors.Monitor('myMonitor', width=35.56, distance=60)
+mon.setSizePix([1920, 1080])
+win = visual.Window(monitor=mon, size=(400,400), color=[-1,-1,-1])
+
+nTrials=10
+my_text=visual.TextStim(win)
+
+rt_clock = core.Clock()  # create a response time clock
+cd_timer = core.CountdownTimer() #add countdown timer
+
+for trial in range(nTrials):
+    rt_clock.reset()  # reset timing for every trial
+    cd_timer.add(2) #add 2 seconds
+
+    event.clearEvents(eventType='keyboard')  # reset keys for every trial
+    while cd_timer.getTime() > 0: #for 2 seconds
+
+        my_text.text = "trial %i" % trial
+        my_text.draw()
+        win.flip()
+
+        keys = event.getKeys(keyList=['1', '2'])  #collect keypresses after first flip
+
+        if keys:
+            resp_time = rt_clock.getTime() #use getTime to determine the response time
+            print(keys, resp_time) #print keys and response times
+
+win.close()
+```
+
+When I change the code (scrpit below) to indent this keys = event.getKeys(keyList=['1', '2']) into the if keys: chunck, it gives and error because I have not yet defined keys. If you try indented it further in the while loop, it will simply give you an error w/ un expected indent. 
+NameError: name 'keys' is not defined
+
+```ruby
+#KEYPRESS_ PSYCOTOOLBOX
+from psychopy import core, event, visual, monitors
+
+mon = monitors.Monitor('myMonitor', width=35.56, distance=60)
+mon.setSizePix([1920, 1080])
+win = visual.Window(monitor=mon, size=(400,400), color=[-1,-1,-1])
+
+nTrials=10
+my_text=visual.TextStim(win)
+
+rt_clock = core.Clock()  # create a response time clock
+cd_timer = core.CountdownTimer() #add countdown timer
+
+for trial in range(nTrials):
+    rt_clock.reset()  # reset timing for every trial
+    cd_timer.add(2) #add 2 seconds
+
+    event.clearEvents(eventType='keyboard')  # reset keys for every trial
+    while cd_timer.getTime() > 0: #for 2 seconds
+
+        my_text.text = "trial %i" % trial
+        my_text.draw()
+        win.flip()
+
+        
+        if keys:
+            keys = event.getKeys(keyList=['1', '2'])  #collect keypresses after first flip
+            resp_time = rt_clock.getTime() #use getTime to determine the response time
+            print(keys, resp_time) #print keys and response times
+
+win.close()
+```
+
+
+### 2. Try out the kb keypress functions using core.wait instead of a CountdownTimer. What happens?
+
+### 3. Use your favorite search engine to interpret epoch time from key.tDown. Add a bit of code using datetime or ctime modules to print epoch time into a readable format.
