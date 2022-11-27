@@ -89,6 +89,48 @@ win.close()
 
 ### 2. Statement placement in your script is very important when collecting responses and refreshing keypresses. What happens if you put event.ClearEvents within the trial loop instead of outside the trial loop? What happens if you unindent the "if keys:" line?
 
+When I unindent the event.clearEvents, it can no longer be placed into the for loop where I want it. Inside the for loop, between the fixation portion and the trial, it clears any responses recorded during the fixation cross presentation. So, when I take it out of the loop (as seen below) any key presses occuring during the fixation cross period will be recorded, which I do not want. 
+```ruby
+from psychopy import core, event, visual, monitors
+
+mon = monitors.Monitor('myMonitor', width=35.56, distance=60)
+mon.setSizePix([1920, 1080])
+win = visual.Window(monitor=mon, size=(400,400), color=[-1,-1,-1])
+
+nTrials=10
+my_text=visual.TextStim(win)
+fix=visual.TextStim(win, text='+')
+sub_resp = []
+
+for trial in range(nTrials):
+    
+    keys = event.getKeys() #put getkeys HERE
+    trial = trial +1 
+    my_text.text = "trial %i" %trial #insert integer into the string with %i
+    
+    fix.draw()
+    win.flip()
+    core.wait(2)
+    
+    my_text.draw()
+    win.flip()
+    core.wait(1)
+    
+    print("keys that were pressed", keys) #which keys were pressed?
+    
+#--------------NOT WORKING-------------------------------------------------------------------------------------------------------------
+    if keys: 
+        sub_resp = keys[0] 
+        if sub_resp == '1' or sub_resp == '2':
+            print('response that was counted', sub_resp)
+        elif not sub_resp:
+            print('response that was counted', 'no response') # if sub response is empty, print this 
+        else: 
+            print('response that was counted', 'Wrong key response')
+event.clearEvents() #clear events HERE- this avoids including key presses that occur during fixation cross 
+win.close()
+```
+
 ```ruby
 
 from psychopy import core, event, visual, monitors
