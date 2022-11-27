@@ -130,7 +130,7 @@ for trial in range(nTrials):
 event.clearEvents() #clear events HERE- this avoids including key presses that occur during fixation cross 
 win.close()
 ```
-
+What happens if you unindent the "if keys:" line?:
 ```ruby
 
 from psychopy import core, event, visual, monitors
