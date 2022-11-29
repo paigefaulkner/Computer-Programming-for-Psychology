@@ -514,7 +514,7 @@ with open(fullAddress, 'w') as sub_data:
 
 df = pd.read_csv(r"C:\Users\User\Desktop\School Work\505- py\data\assign8TestNov282022.csv")  #I had to use absolute path b/c it wasnt finding my data folder 
 print(df)
-
+#rudimentory analysis
 acc_trials = df.loc[df['sub_acc'] == 1] 
 print(acc_trials)
 print(len(acc_trials)/len(df['sub_acc'])) #printing average subject accuracy
@@ -522,6 +522,13 @@ print(len(acc_trials)/len(df['sub_acc'])) #printing average subject accuracy
 no_resp = df.loc[df['sub_resp'] == 0] 
 print(no_resp)
 print(len(no_resp)/len(df['sub_resp']))
+
+
+#rudimentory analysis
+print("Pearson r:")
+print(pd.DataFrame.corr(df,method='pearson'))
+print("Spearman rho:")
+print(pd.DataFrame.corr(df,method='spearman'))
 
 ```
 
