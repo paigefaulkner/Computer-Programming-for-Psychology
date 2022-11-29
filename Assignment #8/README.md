@@ -407,11 +407,11 @@ print(df)
 
 acc_trials = df.loc[df['sub_acc'] == 1] 
 print(acc_trials)
-print(len(acc_trials)/len(df['sub_acc']))
+print(len(acc_trials)/len(df['sub_acc'])) #printing average subject accuracy
 
 no_resp = df.loc[df['sub_resp'] == 0] 
 print(no_resp)
 print(len(no_resp)/len(df['sub_resp']))
-win.close()
+
 ```
 
