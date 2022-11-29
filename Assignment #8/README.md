@@ -287,7 +287,20 @@ with open(fullAddress, 'w') as sub_data:
 
 ## Read JSON exercises
 ### 1. Create a short "read and analysis" script that loads a saved JSON file, performs rudimentary analyses on the data, and prints the means.
+```ruby
+import pandas as pd 
+df = pd.read_csv('assign8TestNov282022.csv')
+print(df)
 
+acc_trials = df.loc[df['sub_acc'] == 2] 
+print(acc_trials)
+print(len(acc_trials)/len(df['sub_acc'])) 
+
+no_resp = df.loc[df['sub_resp'] == -1] 
+print(no_resp)
+print(len(no_resp)/len(df['sub_resp']))
+win.close()
+```
 ### 2. Change your "read and analysis" script so that RTs for inaccurate responses are removed from analysis.
 
 ### 3. Change your "read and analysis" script so that any trials without a response (0 value) are removed from analysis.
