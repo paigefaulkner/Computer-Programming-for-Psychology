@@ -54,7 +54,7 @@ mon.save()
 thisSize = mon.getSizePix()
 thisWidth = thisSize[0]
 thisHeight = thisSize[1]
-win = visual.Window(monitor=mon, color = 'Black', fullscr= False) #create window that is fullscreen and is black #CHANGE TO TRUE********
+win = visual.Window(monitor=mon, color = 'Black', fullscr= True) #create window that is fullscreen and is black #CHANGE TO TRUE********
 
 #STIMLULI
 
@@ -65,17 +65,6 @@ start_msg_1 = ('Instructions: You will play this game with a partner. \n \n In t
                'Your partner can split the $3 and you both receive $1.5 or your partner can keep the $3 for themselves and you recieve nothing for the round. \n \n'
                'You will play 3 games with a new partner each game. Each game will conist of 10 of rounds. \n \n'
                'If you understand the rules and consent to the game, enter "y". If you do not wish to play enter "n"')
-
-
-
-
-#Prefill lists for responses & results of trust game
-sub_resp = [] #Empty list to record whether ppt decides to KEEP or INVEST the money 
-response_time = [] #Empty list to record how long the ppt takes to decide whether to KEEP or INVEST the money 
-condition = [] #Empty list to record the Partner reciprocation rate during each block (Trustworthy, untrustworthy, neurtal)
-trial_earnings = [] #Empty list to record how much the particpant earned during a given trial 
-sum_earnings = [] #Empty list to record how much the participant has earned total for that Block (will reset at the start of a new block)
-
 
 
 #create players & their reciprocation rates
@@ -89,13 +78,19 @@ participant_total_earnings = 0.00
 bot_decison_delay = [] #how long the bot takes to reply
 partner_text_colour = ["LightSkyBlue", "Plum", "Gold"]
 
-
-
 #delete - colour_text = visual.TextStim(win, text= 'Text', color='black') 
 block_text = visual.TextStim(win)
 trial_text = visual.TextStim(win)
 Finish_Text = visual.TextStim(win)
 # delete fixation = visual.TextStim(win, text='+', color='black') #creating fixation stimulus
+
+#Prefill lists for responses & results of trust game
+sub_resp = [] #Empty list to record whether ppt decides to KEEP or INVEST the money 
+response_time = [] #Empty list to record how long the ppt takes to decide whether to KEEP or INVEST the money 
+condition = [] #Empty list to record the Partner reciprocation rate during each block (Trustworthy, untrustworthy, neurtal)
+trial_earnings = [] #Empty list to record how much the particpant earned during a given trial 
+sum_earnings = [] #Empty list to record how much the participant has earned total for that Block (will reset at the start of a new block)
+
 
 #=====================
 #START EXPERIMENT
@@ -265,4 +260,5 @@ elif keys[0] == 'y': # continue on if they do consent
 #Delgado, M. R., Frank, R. H., & Phelps, E. A. (2005). Perceptions of moral character modulate the neural systems of reward during the trust game. 
 #   Nature Neuroscience, 8(11), 1611–1618. 
 #   https://doi.org/10.1038/nn1575
+
 
