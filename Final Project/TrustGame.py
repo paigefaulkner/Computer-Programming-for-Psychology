@@ -54,7 +54,7 @@ mon.save()
 thisSize = mon.getSizePix()
 thisWidth = thisSize[0]
 thisHeight = thisSize[1]
-win = visual.Window(monitor=mon, color = 'Black', fullscr= True) #create window that is fullscreen and is black #CHANGE TO TRUE********
+win = visual.Window(monitor=mon, color = 'Black', fullscr= True) #create window that is fullscreen and is black
 
 #STIMLULI
 
@@ -78,11 +78,11 @@ participant_total_earnings = 0.00
 bot_decison_delay = [] #how long the bot takes to reply
 partner_text_colour = ["LightSkyBlue", "Plum", "Gold"]
 
-#delete - colour_text = visual.TextStim(win, text= 'Text', color='black') 
+
 block_text = visual.TextStim(win)
 trial_text = visual.TextStim(win)
 Finish_Text = visual.TextStim(win)
-# delete fixation = visual.TextStim(win, text='+', color='black') #creating fixation stimulus
+
 
 #Prefill lists for responses & results of trust game
 sub_resp = [] #Empty list to record whether ppt decides to KEEP or INVEST the money 
@@ -199,7 +199,7 @@ elif keys[0] == 'y': # continue on if they do consent
                         time.sleep(0.2)
                         i = ((i + 1) % len(states))  
                         #print("word")
-                        if (time.time() - timer) >= random.randint(2,8) and i == 0:       
+                        if (time.time() - timer) >= random.randint(2,8) and i == 0:  #random amount of time from 2-8 seconds (making my bot partner a more life-like!)      
                             loop = False                   
                 # NOW THE "PARTNER" OF THE PARTICIPANT DECIDES WHETHER TO SHARE OR KEEP ALL THE MONEY TO THEMSELF
                     #A CHOICE OF 1 = SHARE W/ PPT
@@ -207,9 +207,6 @@ elif keys[0] == 'y': # continue on if they do consent
                     choice = random.choice(recip_rate) # this is the "partner" making a choice based on their reciprocation rate (25%, 50% or 75%)
                     #The choice is determined by the current Partner's reciprocaion rate 
 
-                    #UNCOMMENT BELOW************************************************************ #change time 
-                    #core.wait(round(random.uniform(2,4), 1)) #random amount of time from 2-4 seconds (making my bot partner a more life-like!)
-                    #store in 
                     if choice == 1: #if the partner(bot) chooses to share, then 
                         participant_total_earnings = participant_total_earnings + (3.00/2.00) # the particpnats total earnings increase by $1.50
                         sum_earnings.append(participant_total_earnings) #the total sum amount for THIS block/condition is added to a list for saving data
