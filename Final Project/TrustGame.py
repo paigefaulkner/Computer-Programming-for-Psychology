@@ -19,6 +19,8 @@ from datetime import datetime
 import numpy as np
 import pandas as pd 
 import os
+import time
+
 
 
 
@@ -37,9 +39,9 @@ if not os.path.exists(path): # if the directory is no there yet, make one with p
 #create way to make new file name for each ppt: 
 expInfo = {'subject_nr':0, 'age': 0} #create dictionary for gui 
 myDlg = gui.DlgFromDict(dictionary=expInfo) #create gui & use dictionary
-filename = (str(expInfo['subject_nr']) + '_TrustGameData.csv') #save file for each ppt as a csv 
-#----------------ISSUEE--------------------------------------------------------------------------------------------------
-# is there a way to check your files for that file and then say, this file already exists, please redo gui input? 
+now = datetime.now()
+dt_string = now.strftime("_date_%d-%m-%Y_time_%H:%M")
+filename = (str(expInfo['subject_nr']) + dt_string + '_TrustGameData.csv') #save file for each ppt as a csv 
 
 #STIMULI & TRIAL SETTINGS
 nBlocks=3
@@ -55,7 +57,7 @@ mon.save()
 thisSize = mon.getSizePix()
 thisWidth = thisSize[0]
 thisHeight = thisSize[1]
-win = visual.Window(monitor=mon, color = 'Black', fullscr= True) #create window that is fullscreen and is black
+win = visual.Window(monitor=mon, color = 'Black', fullscr= False) #create window that is fullscreen and is black #CHANGE TO TRUE********
 
 #STIMLULI
 
@@ -189,9 +191,24 @@ elif keys[0] == 'y': # continue on if they do consent
                     event.waitKeys()
                 
                 elif keys[0] == 'i': #IF THE PPT CHOOSES TO INVEST THE $1.00:
-                    my_text.setText("You chose to INVEST the $1, increasing it's value to $3 \n" + str(partner) + " will now decide whether to share the money with you or keep the money for themself.") #themself or themselves
-                    my_text.draw()
-                    win.flip()
+                    states = [".", "..", "..."]
+                    first_run = True
+                    i = 0
+                    loop = True
+                    timer = None
+                    while loop:
+                        if first_run:
+                            timer = time.time()
+                            first_run = False
+                            #print(i)
+                        my_text.setText("You chose to INVEST the $1, increasing it's value to $3 \n" + str(partner) + " will now decide whether to share the money with you or keep the money for themself." + "\n" + states[i]) #themself or themselves
+                        my_text.draw()
+                        win.flip()
+                        time.sleep(0.2)
+                        i = ((i + 1) % len(states))  
+                        #print("word")
+                        if (time.time() - timer) >= random.randint(2,8) and i == 0:       
+                            loop = False                   
                 # NOW THE "PARTNER" OF THE PARTICIPANT DECIDES WHETHER TO SHARE OR KEEP ALL THE MONEY TO THEMSELF
                     #A CHOICE OF 1 = SHARE W/ PPT
                     # A CHOICE OF 0 = KEEP THE $3
@@ -199,7 +216,8 @@ elif keys[0] == 'y': # continue on if they do consent
                     #The choice is determined by the current Partner's reciprocaion rate 
 
                     #UNCOMMENT BELOW************************************************************ #change time 
-                    core.wait(round(random.uniform(4,8), 1)) #random amount of time from 9-15 seconds (making my bot partner a more life-like!)
+                    #core.wait(round(random.uniform(2,4), 1)) #random amount of time from 2-4 seconds (making my bot partner a more life-like!)
+                    #store in 
                     if choice == 1: #if the partner(bot) chooses to share, then 
                         participant_total_earnings = participant_total_earnings + (3.00/2.00) # the particpnats total earnings increase by $1.50
                         sum_earnings.append(participant_total_earnings) #the total sum amount for THIS block/condition is added to a list for saving data
@@ -210,8 +228,8 @@ elif keys[0] == 'y': # continue on if they do consent
                         win.flip()
                         event.waitKeys()
                     elif choice == 0: 
-                        trial_earnings.append(0.00) # # Add the earnings for this trial ($0.00) is to trial earning list to data saving 
-                        sum_earnings.append(participant_total_earnings) #add the participant total earnings, no change since last trial since the partner did not share
+                        trial_earnings.append(0.00) # Add the earnings for this trial ($0.00) is to trial earning list to data saving 
+                        sum_earnings.append(participant_total_earnings) # Add the participant total earnings, no change since last trial since the partner did not share
                     #REVEAL PARTNER DECISION TO PARTICIPANT:
                         my_text.setText(str(partner) + " decided to not split the money with you and keep the $3. \n Your total earnings this round = $0.00 \n Your sum total earnings = $ " + str(participant_total_earnings) + "0 \n" + str(partner)+ "'s earning this round = $3.00 \n \n Press any key to continue") #themself or themselves
                         my_text.draw()
@@ -244,29 +262,6 @@ elif keys[0] == 'y': # continue on if they do consent
     "Response Time (seconds)": response_time
     })
     df.to_csv(os.path.join(path, filename), sep=',', index=False)
-    #==================I want to add something in case someone makes an error in naming the file ========================================================
-# 
-# https://stackoverflow.com/questions/40375366/pandas-to-csv-checking-for-overwrite
-    # import pandas as pd
-    # def write_csv_df(path, filename, df):
-        # Give the filename you wish to save the file to
-        # pathfile = os.path.normpath(os.path.join(path,filename))
-
-        # Use this function to search for any files which match your filename
-        # files_present = os.path.isfile(pathfile) 
-        # if no matching files, write to csv, if there are matching files, print statement
-        # if not files_present:
-        #     df.to_csv(pathfile, sep=';')
-        # else:
-        #     overwrite = raw_input("WARNING: " + pathfile + " already exists! Do you want to overwrite <y/n>? \n ")
-        #     if overwrite == 'y':
-        #         df.to_csv(pathfile, sep=';')
-        #     elif overwrite == 'n':
-        #         new_filename = raw_input("Type new filename: \n ")
-        #         write_csv_df(path,new_filename,df)
-        #     else:
-        #         print "Not a valid input. Data is NOT saved!\n"
-    #======================================================================================================
     win.close() #close window once done! 
 
 
