@@ -9,14 +9,9 @@
 # The reciprocation rates for the trustworthy, neutral, and untrustworthy conditions are 75%, 50% and 25%, respectively (Phan et al., 2010). 
 
 #IMPORT MODULES 
-import sys
 import random 
 from random import sample
-from ctypes import sizeof
-from matplotlib.pyplot import hsv
 from psychopy import visual, monitors, event, core, gui
-from datetime import datetime
-import numpy as np
 import pandas as pd 
 import os
 import time
@@ -36,9 +31,8 @@ if not os.path.exists(path): # if the directory is no there yet, make one with p
 #create way to make new file name for each ppt: 
 expInfo = {'subject_nr':0, 'age': 0} #create dictionary for gui 
 myDlg = gui.DlgFromDict(dictionary=expInfo) #create gui & use dictionary
-now = datetime.now()
-dt_string = now.strftime("_date_%d-%m-%Y_time_%H:%M")
-filename = (str(expInfo['subject_nr']) + dt_string + '_TrustGameData.csv') #save file for each ppt as a csv 
+filename = (str(expInfo['subject_nr']) + '_TrustGameData.csv') #save file for each ppt as a csv 
+
 
 #STIMULI & TRIAL SETTINGS
 nBlocks=3
@@ -82,7 +76,8 @@ partner_text_colour = ["LightSkyBlue", "Plum", "Gold"]
 block_text = visual.TextStim(win)
 trial_text = visual.TextStim(win)
 Finish_Text = visual.TextStim(win)
-
+my_text = visual.TextStim(win, height=0.08, wrapWidth=1.8)
+decision_text = visual.TextStim(win, height=0.08)
 
 #Prefill lists for responses & results of trust game
 sub_resp = [] #Empty list to record whether ppt decides to KEEP or INVEST the money 
@@ -96,8 +91,6 @@ sum_earnings = [] #Empty list to record how much the participant has earned tota
 #START EXPERIMENT
 #=====================
 
-my_text = visual.TextStim(win, height=0.08, wrapWidth=1.8)
-decision_text = visual.TextStim(win, height=0.08)
 my_text.text = start_msg_1
 my_text.draw()
 win.flip()
@@ -257,5 +250,4 @@ elif keys[0] == 'y': # continue on if they do consent
 #Delgado, M. R., Frank, R. H., & Phelps, E. A. (2005). Perceptions of moral character modulate the neural systems of reward during the trust game. 
 #   Nature Neuroscience, 8(11), 1611–1618. 
 #   https://doi.org/10.1038/nn1575
-
 
