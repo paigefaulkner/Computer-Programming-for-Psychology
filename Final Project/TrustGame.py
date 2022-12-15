@@ -38,6 +38,8 @@ if not os.path.exists(path): # if the directory is no there yet, make one with p
 expInfo = {'subject_nr':0, 'age': 0} #create dictionary for gui 
 myDlg = gui.DlgFromDict(dictionary=expInfo) #create gui & use dictionary
 filename = (str(expInfo['subject_nr']) + '_TrustGameData.csv') #save file for each ppt as a csv 
+#----------------ISSUEE--------------------------------------------------------------------------------------------------
+# is there a way to check your files for that file and then say, this file already exists, please redo gui input? 
 
 #STIMULI & TRIAL SETTINGS
 nBlocks=3
@@ -53,7 +55,7 @@ mon.save()
 thisSize = mon.getSizePix()
 thisWidth = thisSize[0]
 thisHeight = thisSize[1]
-win = visual.Window(monitor=mon, color = 'DimGrey', fullscr= True) #create window that is fullscreen and is black
+win = visual.Window(monitor=mon, color = 'Black', fullscr= True) #create window that is fullscreen and is black
 
 #STIMLULI
 
@@ -138,15 +140,16 @@ elif keys[0] == 'y': # continue on if they do consent
     #=====================  
 
         for trial in range(nTrials):
-            if recip_rate == [0,0,0,1]:
+    #------Saving which condition occurs in the trial for csv file-----------
+        #---- 0 = keep, 1 = share 
+            if recip_rate == [0,0,0,1]: # if the reciprocate rate is 3 keep : 1 share, add the condition as untrustworthy to list
                 condition.append("Untrustworthy")
-                #print("Condition:" + str(condition))
-            elif recip_rate == [0,0,1,1]:
+            elif recip_rate == [0,0,1,1]: # if the reciprocate rate is 1 keep : 2 share, add the condition as neurtal to list 
                 condition.append("Neutral")
-                #print("Condition:" + str(condition))
-            elif recip_rate == [0,1,1,1]:
+            elif recip_rate == [0,1,1,1]: # if the reciprocate rate is 1 keep : 3 share, add the condition as trustworthy to list
                 condition.append("Trustworthy")
-                #print("Condition:" + str(condition))
+
+    #--------Show ppt what trial they are on------------
             trial_text.setText('Trial #' + str(trial+1) + '\n \n Press any key to continue.') #set trial_text to the current trial
             trial_text.draw()
             win.flip() #present trial text
@@ -241,4 +244,39 @@ elif keys[0] == 'y': # continue on if they do consent
     "Response Time (seconds)": response_time
     })
     df.to_csv(os.path.join(path, filename), sep=',', index=False)
+    #==================I want to add something in case someone makes an error in naming the file ========================================================
+# 
+# https://stackoverflow.com/questions/40375366/pandas-to-csv-checking-for-overwrite
+    # import pandas as pd
+    # def write_csv_df(path, filename, df):
+        # Give the filename you wish to save the file to
+        # pathfile = os.path.normpath(os.path.join(path,filename))
+
+        # Use this function to search for any files which match your filename
+        # files_present = os.path.isfile(pathfile) 
+        # if no matching files, write to csv, if there are matching files, print statement
+        # if not files_present:
+        #     df.to_csv(pathfile, sep=';')
+        # else:
+        #     overwrite = raw_input("WARNING: " + pathfile + " already exists! Do you want to overwrite <y/n>? \n ")
+        #     if overwrite == 'y':
+        #         df.to_csv(pathfile, sep=';')
+        #     elif overwrite == 'n':
+        #         new_filename = raw_input("Type new filename: \n ")
+        #         write_csv_df(path,new_filename,df)
+        #     else:
+        #         print "Not a valid input. Data is NOT saved!\n"
+    #======================================================================================================
     win.close() #close window once done! 
+
+
+# References 
+
+# Phan, K., L., Sripada, C. S., Angstadt, M., & McCabe, K. (2010). Reputation for reciprocity engages the brain reward center. 
+#   Proceedings of the National Academy of Sciences, 107(29), 13099-13104. 
+#   https://doi.org/10.1073/pnas.1008137107
+
+#Delgado, M. R., Frank, R. H., & Phelps, E. A. (2005). Perceptions of moral character modulate the neural systems of reward during the trust game. 
+#   Nature Neuroscience, 8(11), 1611–1618. 
+#   https://doi.org/10.1038/nn1575
+
