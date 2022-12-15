@@ -21,9 +21,6 @@ import pandas as pd
 import os
 import time
 
-
-
-
 #=====================
 #PATH SETTINGS
 #=====================
@@ -236,6 +233,7 @@ elif keys[0] == 'y': # continue on if they do consent
                         win.flip()
                         event.waitKeys()
 #END OF EXPERIMENT: 
+    # Give the particpants their total earnings per block: 
     Finish_Text.setText("You have finished all three games. Here are your total earnings. \n \n "
                         "Earnings in Block 1: $" + str(sum_earnings[9]) + "0"
                         "\n \n Earnings in Block 2: $" + str(sum_earnings[19]) + "0"
@@ -244,24 +242,17 @@ elif keys[0] == 'y': # continue on if they do consent
     Finish_Text.draw()
     win.flip()
     event.waitKeys()
-# Ensuring the lengths of each list are equal, as they must be to create data frame
-    # print(len([i for i in range(3) for j in range(10)]))
-    # print(len(condition))
-    # print(len(list(range(10))*3))
-    # print(len(trial_earnings))
-    # print(len(sum_earnings))
-    # print(len(sub_resp))
-    # print(len(response_time))
+# Create & save data frame 
     df = pd.DataFrame(data={
-    "Block Number": [i for i in range(3) for j in range(10)],
-    "Condition": condition,
-    "Trial Number": list(range(10))*3, 
-    "Subject Response": sub_resp,
-    "Subject Earning this Trial": trial_earnings,
-    "Subject Sum Earnings this round": sum_earnings, 
-    "Response Time (seconds)": response_time
+    "Block Number": [i for i in range(3) for j in range(10)], #records block number
+    "Condition": condition, #records condition (i.e trustworthy, untrustworthy neurtal)
+    "Trial Number": list(range(10))*3, # records trial number for each trial in a block
+    "Subject Response": sub_resp, #records whether the participant chose to invest or keep their money
+    "Subject Earning this Trial": trial_earnings, #records the amount the particpant gained for that trial
+    "Subject Sum Earnings this round": sum_earnings, #records the total earnings thus far during a given block
+    "Response Time (seconds)": response_time #records how long the participant took to make their decsion each trial
     })
-    df.to_csv(os.path.join(path, filename), sep=',', index=False)
+    df.to_csv(os.path.join(path, filename), sep=',', index=False) #Create csv 
     win.close() #close window once done! 
 
 
